@@ -9,6 +9,7 @@ export default createGlobalStyle`
   }
   body {
     background: #312E38;
+    font-family: 'Roboto';
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     ::-webkit-scrollbar {

@@ -1,10 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
-display: flex;
-position: absolute;
-`;
-
 interface ParentProps {
   isVisible: boolean;
 }
@@ -12,36 +7,54 @@ interface ChildrensMenuProps {
   isVisible: boolean;
 }
 
-export const ParentMenu = styled.div<ParentProps>`
-display: none;
-${props => props.isVisible && css`display: block;`}
-background: #fff;
-padding: 5px 20px;
-width: 250px;
-height: 200px;
-border-right: 1px solid;
-margin-left: 100px;
-button {
+export const Container = styled.div`
   display: flex;
-  width: 100%;
-  outline: none;
-  background: #fff;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-}
+  position: absolute;
+`;
+
+export const ParentMenu = styled.div<ParentProps>`
+  display: none;
+  ${props => props.isVisible && css`display: block;`}
+  background: #28262E;
+  padding: 5px 20px;
+  width: 300px;
+  height: 250px;
+  margin-left: 100px;
+  button {
+    display: flex;
+    width: 100%;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    align-items: center;
+    justify-content: space-between;
+    height: 33%;
+    font-size: 16px;
+  }
 `;
 
 export const ChildrensMenu = styled.div<ChildrensMenuProps>`
-display: none;
-${props => props.isVisible && css`display: block;`}
-background: #FFF;
-padding: 10px;
-min-width: 130px;
-p {
-  font-size: 16px;
-  & + p {
-    margin-top: 20px;
+  display: none;
+  ${props => props.isVisible && css`display: block;`}
+  background: #FFF;
+  border-left: 0.5px solid #FFF;
+  padding: 10px;
+  width: 300px;
+  height: 250px;
+  p {
+    font-size: 16px;
+    & + p {
+      margin-top: 20px;
+    }
   }
-}
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: 16px;
+      color: #000;
+      height: 33%;
+      width: 100%;
+      padding-left: 10px;
+    }
 `;

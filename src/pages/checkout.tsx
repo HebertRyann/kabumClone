@@ -1,10 +1,8 @@
 import {
   Container,
-  Header,
   HeaderContent,
   ChildrensMenu,
   ContentSearch,
-  Menu,
   Parent,
   ParentMenu,
   SearchContainer,
@@ -41,10 +39,15 @@ import {
 } from "react-icons/ri";
 
 import { Input } from '../components/input';
+import { Header } from '../components/header';
+import { Menu } from '../components/menu';
+import { TreeMenu } from '../components/treemenu';
+import { Cart } from '../components/cart';
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useCart } from '../hooks/cart';
+import axios from 'axios';
 
 interface MenuDTO {
   id?: number;
@@ -73,13 +76,14 @@ interface Products {
 const CheckoutPage: React.FC = () => {
 
   const { cart, decrementProduct, incrementProduct, removeProduct, cartTotal } = useCart();
-  const [visibleParentMenu, setVisibleParentMenu] = useState(false);
   const componentRef = useRef(null);
-  const [visibleSearchContent, setVisibleSearchContent] = useState(false);
-  const [visibleChildrensMenu, setVisibleChildrensMenu] = useState(false);
   const [childrensMenu, setChildrensMenu] = useState<MenuDTO[]>([]);
   const [filterOffers, setFilterOffers] = useState<Products[]>([]);
   const [offers, setOffers] = useState<Products[]>([]);
+  const [visibleCart, setVisibleCart] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+  const [visibleParentMenu, setVisibleParentMenu] = useState(false);
+  const [visibleChildrensMenu, setVisibleChildrensMenu] = useState(false);
   const formatValue = new Intl.NumberFormat('pt-BR', {
     style: "currency",
     currency: 'BRL',
@@ -101,22 +105,9 @@ const CheckoutPage: React.FC = () => {
     { name: 'Mouse', parent: 3 },
   ]);
 
-  const handleLeaveSearch = useCallback(() => {
-    setVisibleSearchContent(false);
-  }, [visibleSearchContent]);
-
-  const handleToggleSearch = useCallback(() => {
-    setVisibleSearchContent(true);
-  }, [visibleSearchContent]);
-
-  const handleSearchInput = useCallback((event: FormEvent<HTMLInputElement>) => {
-    const offersString = offers.map(product => JSON.stringify(product));
-    const filter = offersString.map(product => product.toLowerCase().includes(`${event.currentTarget.value.toLowerCase()}`) ? JSON.parse(product) : false);
-    const filterOffers = filter.filter((product) => product !== false);
-    if (filterOffers) {
-      setFilterOffers(filterOffers);
-    }
-  }, [filterOffers]);
+  const handleOpenCart = useCallback(() => {
+    setVisibleCart(!visibleCart)
+  }, [visibleCart]);
 
   const handleSetVisibleParentMenu = useCallback(() => {
     setVisibleParentMenu(!visibleParentMenu);
@@ -134,11 +125,10 @@ const CheckoutPage: React.FC = () => {
     }
   }, [visibleChildrensMenu, childrensMenu]);
 
+
   useEffect(() => {
-    fetch('http://localhost:3333/products').then(response => {
-      response.json().then(data => {
-        setOffers(data);
-      })
+    axios.get('/api/listproducts').then(response => {
+      setOffers(response.data);
     })
     componentRef.current.scrollIntoView(
       {
@@ -146,84 +136,29 @@ const CheckoutPage: React.FC = () => {
       }
     );
   }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset >= 100) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    })
+  }, []);
 
   return (
     <Container>
 
-      <Header>
-        <HeaderContent>
-          <a href="/" className="Logo">Kabum</a>
-          <SearchContainer onMouseLeave={handleLeaveSearch}>
-            <WrapperSearch>
-              <Input
-                icon={FiSearch}
-                size={22}
-                color={'#ff9000'}
-                name="product"
-                type="text"
-                placeholder="O Que Você esta Procurando"
-                onChange={(event) => handleSearchInput(event)}
-                onClick={handleToggleSearch}
-              />
-              <ContentSearch isVisible={visibleSearchContent}  >
-                {visibleSearchContent && filterOffers.length > 0 && filterOffers.map(product => (
-                  <a key={product.title} href={`/${product.id}`} className="ProductsSearch">
-                    <p>{product.title}</p>
-                    <strong>{product.description}</strong>
-                  </a>
-                ))}
-                {visibleSearchContent && filterOffers.length === 0 && offers.map(product => (
-                  <a key={product.title} href={`/${product.id}`} className="ProductsSearch">
-                    <p>{product.title}</p>
-                    <strong>{product.description}</strong>
-                  </a>
-                ))}
-              </ContentSearch>
-            </WrapperSearch>
-          </SearchContainer>
-          <div>
-            <div className="IconContainerUser">
-              <FiUser size={20} color="#ff9000" />
-            </div>
-            <p>Profile name <FiChevronDown size={16} /></p>
-          </div>
-          <div className="containerCart" >
-            <div className="IconContainerCart">
-              <FiShoppingCart size={20} color="#ff9000" />
-            </div>
-          </div>
-        </HeaderContent>
-      </Header>
+      <Header handleOpenCart={handleOpenCart}/>
 
-      <Menu>
-        <button type="button" onClick={handleSetVisibleParentMenu}>
-          <FiMenu size={20} color="#ff9000" />
-              Todas as Categorias
-          </button>
-      </Menu>
+      <Menu handleOpen={handleSetVisibleParentMenu}/>
 
-      <Parent >
-        <ParentMenu isVisible={visibleParentMenu}>
-          {menuData.map(parent => (
-            parent.parent === null && (
-              <button key={parent.name} onClick={() => handleOpenSubMenu(parent.id)}>
-                {parent.name}
-                <FiChevronRight size={20} />
-              </button>
-            )
-          ))}
-        </ParentMenu>
-
-        <ChildrensMenu isVisible={visibleChildrensMenu}>
-          {menuData.map(parent =>
-            childrensMenu && childrensMenu.map(children => (
-              children.parent === parent.id && (
-                <a href="/" key={children.name}>{children.name}</a>
-              )
-            ))
-          )}
-        </ChildrensMenu>
-      </Parent>
+      <TreeMenu 
+        isVisible={visibleParentMenu} 
+        handleOpenSubMenu={handleOpenSubMenu}
+        isVisibleChildrens={visibleChildrensMenu}
+        childrensMenu={childrensMenu}
+      />
 
       <ListProductsCart>
         {!cart.length ? (

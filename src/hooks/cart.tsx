@@ -35,7 +35,7 @@ interface CartContext {
   removeProduct(productCart: Products): void;
 }
 
-const CartContext = createContext<CartContext | null>(null);
+const CartContext = createContext({} as CartContext);
 
 const CartProvider: React.FC = ({ children }) => {
 
@@ -119,4 +119,4 @@ function useCart(): CartContext {
   return context;
 };
 
-export { CartProvider, useCart };
+export { useCart, CartProvider };

@@ -72,6 +72,8 @@ export const Search: React.FC = () => {
   }, [filterOffers]);
 
   return (
+    <div></div>
+  )
     
 };
 export default Search;

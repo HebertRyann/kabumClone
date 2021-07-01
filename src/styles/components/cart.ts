@@ -25,7 +25,7 @@ const OpacityInScrenn = keyframes`
 }
 `;
 
-export const CartContainer = styled.div<CartProps>`
+export const Container = styled.div<CartProps>`
   display:  none;
   position: fixed;
   width: 400px;

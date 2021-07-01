@@ -7,7 +7,7 @@ import {
 
 } from 'react';
 import {
-  CartContainer,
+  Container,
   CartProducts,
   ContentCart,
   EmptyBag,
@@ -21,6 +21,7 @@ import {
   FiMinusSquare,
   FiXSquare,
 } from 'react-icons/fi';
+import { useCart } from '../../hooks/cart';
 
 interface Products {
   id: number;
@@ -39,51 +40,46 @@ interface CartProps {
 }
 
 export const Cart: React.FC<CartProps> = ({ isVisisble, isScolling, cartState }) => {
-  const [visibleCart, setVisibleCart] = useState(false);
-  const [cart, setCart] = useState<Products[]>(cartState);
-  const [scrolling, setScrolling] = useState(false);
+  const { decrementProduct, incrementProduct, removeProduct, cartTotal, cart } = useCart();
   const formatValue = new Intl.NumberFormat('pt-BR', {
     style: "currency",
     currency: 'BRL',
     minimumFractionDigits: 2,
   });
 
-  const handleOpenCart = useCallback(() => {
-    setVisibleCart(!visibleCart);
-    console.log('true')
-  }, [visibleCart]);
-
-  const handleIncrementProduct = useCallback((productCart: Products) => {
-    const findProduct = cart.find(product => product.title === productCart.title);
-    if (findProduct) {
-      setCart(cart.map(product => product.title === productCart.title ? { ...productCart, quantity: product.quantity + 1 } : product));
-    }
-  }, [cart]);
-
-  const handleDecrementProduct = useCallback((productCart: Products) => {
-    const findProduct = cart.find(product => product.title === productCart.title);
-    if (findProduct && findProduct.quantity > 1) {
-      setCart(cart.map(product => product.title === productCart.title ? { ...productCart, quantity: product.quantity - 1 } : product));
-    }
-  }, [cart]);
-
-  const handleRemoveProduct = useCallback((productCart: Products) => {
-    const findProduct = cart.filter(product => product.title !== productCart.title);
-    if (findProduct) {
-      setCart(findProduct);
-    }
-  }, [cart]);
-
-  const cartTotal = useMemo(() => {
-    const total = cart.reduce((accumlator, product) => {
-      const totalProduct = product.price * product.quantity;
-      return accumlator + totalProduct;
-    }, 0);
-    return total;
-  }, [cart]);
-
   return (
-    
+    <Container isVisible={isVisisble} isScrolling={isScolling} >
+        {cart.length === 0 ? (
+          <EmptyBag>
+            <FiShoppingBag size={50} color="#ff9000" />
+            <p>Não ha Nada aqui</p>
+          </EmptyBag>
+        ) :
+          <WrapperCart>
+            <ContentCart>
+              {cart.map(product => (
+                <CartProducts key={product.id}>
+                  <p>{product.title} x <strong>{product.quantity}</strong></p>
+
+                  <strong>{formatValue.format(product.price)}</strong>
+                  <FiPlusSquare size={24} color="#000" onClick={() => incrementProduct(product)} />
+                  <FiMinusSquare size={24} color="#000" onClick={() => decrementProduct(product)} />
+                  <FiXSquare size={24} color="red" onClick={() => removeProduct(product)} />
+                </CartProducts>
+              ))}
+            </ContentCart>
+            <SubTotalCart>
+              <TextContainerCart>
+                <p>Total</p>
+                <strong>{formatValue.format(cartTotal)}</strong>
+              </TextContainerCart>
+              <a href="/checkout">
+                Finalizar Compra
+              </a>
+            </SubTotalCart>
+          </WrapperCart>
+        }
+      </Container>
   );
 };
 export default Cart;

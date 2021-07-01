@@ -683,6 +683,9 @@ export const InfoProduct = styled.div`
 `;
 export const RelatedProducts = styled.div`
   margin: 50px 0;
+  h1 {
+    color: #fff;
+  }
 `;
 export const DetailsProducts = styled.div`
   display: flex;
@@ -820,12 +823,13 @@ export const RatingContainer = styled.div`
 
 export const CommentRating = styled.div`
   width: 510px;
+  height: 220px;
   span {
     font-size: 15.5px;
   }
   p {
     font-size: 20px;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 70px 0;
   }
 `;
 
