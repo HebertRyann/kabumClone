@@ -1,12 +1,5 @@
 import {
   Container,
-  HeaderContent,
-  ChildrensMenu,
-  ContentSearch,
-  Parent,
-  ParentMenu,
-  SearchContainer,
-  WrapperSearch,
   Product,
   ListProductsCart,
   Total,
@@ -14,40 +7,21 @@ import {
 } from '../styles/pages/checkout';
 
 import {
-  FiChevronDown,
-  FiChevronLeft,
-  FiChevronRight,
-  FiFrown,
-  FiMenu,
   FiMinusSquare,
   FiPlusSquare,
-  FiSearch,
-  FiShoppingBag,
-  FiShoppingCart,
-  FiUser,
   FiXSquare,
 } from 'react-icons/fi';
-
-import {
-  FaRegSadCry,
-  FaRegSadTear,
-  FaSadCry,
-  FaSadTear
-} from "react-icons/fa";
 import {
   RiEmotionSadFill,
 } from "react-icons/ri";
 
-import { Input } from '../components/input';
 import { Header } from '../components/header';
 import { Menu } from '../components/menu';
 import { TreeMenu } from '../components/treemenu';
-import { Cart } from '../components/cart';
 
-import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useCart } from '../hooks/cart';
-import axios from 'axios';
 
 interface MenuDTO {
   id?: number;
@@ -78,10 +52,7 @@ const CheckoutPage: React.FC = () => {
   const { cart, decrementProduct, incrementProduct, removeProduct, cartTotal } = useCart();
   const componentRef = useRef(null);
   const [childrensMenu, setChildrensMenu] = useState<MenuDTO[]>([]);
-  const [filterOffers, setFilterOffers] = useState<Products[]>([]);
-  const [offers, setOffers] = useState<Products[]>([]);
   const [visibleCart, setVisibleCart] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
   const [visibleParentMenu, setVisibleParentMenu] = useState(false);
   const [visibleChildrensMenu, setVisibleChildrensMenu] = useState(false);
   const formatValue = new Intl.NumberFormat('pt-BR', {
@@ -127,23 +98,11 @@ const CheckoutPage: React.FC = () => {
 
 
   useEffect(() => {
-    axios.get('/api/listproducts').then(response => {
-      setOffers(response.data);
-    })
     componentRef.current.scrollIntoView(
       {
         behavior: 'smooth',
       }
     );
-  }, []);
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset >= 100) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
-    })
   }, []);
 
   return (

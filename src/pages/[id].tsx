@@ -1,24 +1,5 @@
 import {
-  useRouter,
-} from "next/router";
-
-import {
   Container,
-  HeaderContent,
-  CartContainer,
-  CartProducts,
-  ChildrensMenu,
-  ContentCart,
-  ContentSearch,
-  EmptyBag,
-  MenuContent,
-  Parent,
-  ParentMenu,
-  SearchContainer,
-  SubTotalCart,
-  TextContainerCart,
-  WrapperCart,
-  WrapperSearch,
   Ratings,
   DetailsProducts,
   RelatedProducts,
@@ -36,28 +17,16 @@ import {
   ContentStar,
 } from '../styles/pages/productPage';
 import {
-  FiChevronDown,
-  FiChevronLeft,
-  FiChevronRight,
-  FiMenu,
-  FiMinusSquare,
-  FiPlusSquare,
-  FiSearch,
-  FiShoppingBag,
-  FiShoppingCart,
   FiStar,
-  FiUser,
-  FiXSquare,
 } from 'react-icons/fi';
-import { Input } from '../components/input';
 import { Header } from '../components/header';
 import { Menu } from '../components/menu';
 import { TreeMenu } from '../components/treemenu';
 import Cart from '../components/cart';
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useCart } from "../hooks/cart";
 import { GetStaticPaths, GetStaticProps } from "next";
-import axios from "axios";
+import { offers } from '../constants';
 
 
 interface MenuDTO {
@@ -83,8 +52,6 @@ interface Products {
 }
 
 const productPage = ({ product }) => {
-  const router = useRouter();
-  const { id } = router.query;
   const { addToCart } = useCart();
   const [visibleCart, setVisibleCart] = useState(false);
   const [scrolling, setScrolling] = useState(false);
@@ -94,7 +61,6 @@ const productPage = ({ product }) => {
   const [relateOffers, setRelateOffers] = useState<Products[]>([]);
   const [imagesProducts, setImagesProducts] = useState(['']);
   const [selectedImage, setSelectedImage] = useState("");
-  const [offers, setOffers] = useState<Products>();
   const formatValue = new Intl.NumberFormat('pt-BR', {
     style: "currency",
     currency: 'BRL',
@@ -141,8 +107,7 @@ const productPage = ({ product }) => {
   }, [selectedImage]);
 
   useEffect(() => {
-    if (product) {
-      setOffers(product);
+    if(product) {
       setRelateOffers(product.relatedProducts);
       setImagesProducts(product.images);
       setSelectedImage(product.images[0]);
@@ -202,15 +167,15 @@ const productPage = ({ product }) => {
             </MainImageProduct>
 
             <InfoProduct>
-              <h1>{offers?.title}</h1>
-              <p>{offers?.description}</p>
+              <h1>{product.title}</h1>
+              <p>{product.description}</p>
               <div className="infoPriceContainer">
-                <span className="old_price">{`de ${formatValue.format(offers?.old_price)}`}</span>
-                <strong>{`Por ${formatValue.format(offers?.price)}`}</strong>
+                <span className="old_price">{`de ${formatValue.format(product.old_price)}`}</span>
+                <strong>{`Por ${formatValue.format(product.price)}`}</strong>
                 <span>ou 10x de R$ 1.200,00</span>
               </div>
               <button
-                onClick={() => addToCart(offers)}
+                onClick={() => addToCart(product)}
               >
                 Adicionar ao Carrinho
             </button>
@@ -260,23 +225,23 @@ const productPage = ({ product }) => {
               <tbody>
                 <tr className="WithBackground">
                   <td>Marca</td>
-                  <td>{offers?.technicalSpecifications.brand}</td>
+                  <td>{product.technicalSpecifications.brand}</td>
                 </tr>
                 <tr >
                   <td>Modelo</td>
-                  <td>{offers?.technicalSpecifications.model}</td>
+                  <td>{product.technicalSpecifications.model}</td>
                 </tr>
                 <tr className="WithBackground">
                   <td>Clock</td>
-                  <td>{`${offers?.technicalSpecifications.Clock} Ghz`}</td>
+                  <td>{`${product.technicalSpecifications.Clock} Ghz`}</td>
                 </tr>
                 <tr >
                   <td>Garantia</td>
-                  <td>{`${offers?.technicalSpecifications.Warranty} ano`}</td>
+                  <td>{`${product.technicalSpecifications.Warranty} ano`}</td>
                 </tr>
                 <tr className="WithBackground">
                   <td>Peso</td>
-                  <td>{`${offers?.technicalSpecifications.weight} gramas`}</td>
+                  <td>{`${product.technicalSpecifications.weight} gramas`}</td>
                 </tr>
               </tbody>
             </table>
@@ -347,10 +312,8 @@ const productPage = ({ product }) => {
 export default productPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(`http://localhost:3000/api/listproducts`);
-  const products = await response.json();
 
-  const paths = products.map((product) => {
+  const paths = offers.map((product) => {
     return { params: { id: `${product.id}` } }
   });
 
@@ -363,8 +326,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params;
 
-  const response = await fetch(`http://localhost:3000/api/product/${id}`);
-  const product = await response.json();
+  const product = offers.find(product => `${product.id}` === id);
   return {
     props: {
       product,

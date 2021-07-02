@@ -94,13 +94,17 @@ min-height: 160px;
 padding: 15px 0 5px 0;
 color: #fff;
 font-size: 18px;
-button {
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   outline: none;
-  height: 50px;
+  height: 56px;
   border-radius: 5px;
   background: #ff9000;
   color: #000;
   font-size: 16px;
+  text-decoration: none;
 }
 `;
 

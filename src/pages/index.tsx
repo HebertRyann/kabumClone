@@ -14,42 +14,16 @@ import {
   TextPreOrder,
   WrapperPreOrder,
   PreOrder,
-  HeaderContent,
-  CartContainer,
-  CartProducts,
-  ChildrensMenu,
-  ContentCart,
-  ContentSearch,
-  EmptyBag,
-  MenuContent,
-  Parent,
-  ParentMenu,
-  SearchContainer,
-  SubTotalCart,
-  TextContainerCart,
-  WrapperCart,
-  WrapperSearch,
 } from '../styles/pages/home';
 import {
-  FiChevronDown,
   FiChevronLeft,
   FiChevronRight,
-  FiMenu,
-  FiMinusSquare,
-  FiPlusSquare,
-  FiSearch,
-  FiShoppingBag,
-  FiShoppingCart,
-  FiUser,
-  FiXSquare,
 } from 'react-icons/fi';
-import { Input } from '../components/input';
 import { Header } from '../components/header';
 import { Menu } from '../components/menu';
 import { TreeMenu } from '../components/treemenu';
-import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useCart } from '../hooks/cart';
-import Link from 'next/link';
 import axios from 'axios';
 import Cart from '../components/cart';
 interface MenuDTO {
@@ -272,7 +246,7 @@ export const Home: React.FC = () => {
             index + 1 >= offers.length - 2 && index + 1 <= offers.length && (
               <ProductsReleases key={product.id}>
                 <a href={`/${product.id}`} >
-                  <h1>{product.id}</h1>
+                  <h1>{product.title}</h1>
                   <p>{product.description}</p>
                   <strong>{formatValue.format(product.price)}</strong>
                 </a>

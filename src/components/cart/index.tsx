@@ -1,12 +1,4 @@
 import {
-  useState,
-  useCallback,
-  useMemo,
-  forwardRef,
-  useImperativeHandle,
-
-} from 'react';
-import {
   Container,
   CartProducts,
   ContentCart,
