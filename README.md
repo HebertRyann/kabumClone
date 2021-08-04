@@ -4,7 +4,7 @@
   KabumClone
 </h1>
 <div align="center">
-    <a href="https://hebertryann.github.io/gobarberr/">Visite a pagina Kabumclone</a>
+    <a href="https://kabum-clone.vercel.app/">Visite a pagina Kabumclone</a>
 </div>
 
 <p align="center">
