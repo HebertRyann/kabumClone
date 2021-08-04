@@ -1,30 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
-## Getting Started
+<h1 align="center">
+  <img alt="GoBarber" src="./Frontend/src/assets/logo.svg" />
+</h1>
 
-First, run the development server:
+<h1 align="center">
+    <a href="https://hebertryann.github.io/gobarberr/">Visite a pagina Kabumclone</a>
+</h1>
+<p align="center"Plataforma inspirada no e-commerce Kabum, projeto criado para aperfeicoa minhas habilidades e aprender mais sobre Serverless, SSR, SEO, Paginas Estaticas e tudo o que o Nextjs traz de funcionalidade. Nesse projeto refiz o design do site e acrescentei outra funcionalidades como torna o acesso ao carrinho muito mais facil atraves do seu icone no cabeçalho, o usuario pode navegar pela pagina com o carrinho aberto a todo momento para ser visualizado e a qualquer momento pode diminuir a quantidade de um produto ou remove-lo, tambem aprendi mais sobre regex e tornei a busca por produtos mais rapida e eficiente</p>
+
+<h4 align="center"> 
+🚀 KabumClone Concluido ✔
+</h4>
+
+
+<p align="center">
+ <a href="#-tecnologias">Tecnologias</a> • 
+ <a href="#autor">Autor</a>
+</p>
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- NextJs
+- Typescript
+
+## Teste Local
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
+### 🎲 Rodando o Frontend (Pagina Web)
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone este repositório
+$ git clone https://github.com/HebertRyann/kabumClone
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd kabumClone
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+
+# A pagina web ficara disponivel localmente e voce pode acessar atraves de <http://localhost:3000>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Autor
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<a href="https://www.linkedin.com/in/hebertryansantos/">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/58072948?v=4" width="100px;" alt=""/>
+ <br />
+ <sub><b>Hebert Santos</b></sub></a> <a href="https://www.linkedin.com/in/hebertryansantos/" title="Perfil">🚀</a>
 
-## Learn More
+Feito com ❤️ por Hebert Santos Com o intuito de consolidar meus conhecimentos 👋🏽 Entre em contato!
+#### Para conferir mais sobre meu trabalho e ver mais projetos acesse meu [Portfolio](https://hebertryann.github.io/portfolio/)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[![Linkedin Badge](https://img.shields.io/badge/-Hebert-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/hebertryansantos/)](https://www.linkedin.com/in/hebertryansantos/) 
+[![Gmail Badge](https://img.shields.io/badge/-hebertryann40@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:hebertryann40@gmail.com)](mailto:hebertryann40@gmail.com)
