@@ -1,12 +1,12 @@
 <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
 <h1 align="center">
-  <img alt="GoBarber" src="./Frontend/src/assets/logo.svg" />
+  KabumClone
 </h1>
-
-<h1 align="center">
+<div align="center">
     <a href="https://hebertryann.github.io/gobarberr/">Visite a pagina Kabumclone</a>
-</h1>
+</div>
+
 <p align="center">
   Plataforma inspirada no e-commerce Kabum, projeto criado para aperfeicoa minhas habilidades e aprender mais sobre Serverless, SSR, SEO, Paginas Estaticas e tudo o que o Nextjs   traz de funcionalidade. Nesse projeto refiz o design do site e acrescentei outra funcionalidades como torna o acesso ao carrinho muito mais facil atraves do seu icone no   cabeçalho, o usuario pode navegar pela pagina com o carrinho aberto a todo momento para ser visualizado e a qualquer momento pode diminuir a quantidade de um produto ou remove-      lo, tambem aprendi mais sobre regex e tornei a busca por produtos mais rapida e eficiente</p>
 
