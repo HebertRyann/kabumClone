@@ -8,7 +8,7 @@
 </div>
 
 <p align="center">
-  Plataforma inspirada no e-commerce Kabum, projeto criado para aperfeicoa minhas habilidades e aprender mais sobre Serverless, SSR, SEO, Paginas Estaticas e tudo o que o Nextjs   traz de funcionalidade. Nesse projeto refiz o design do site e acrescentei outra funcionalidades como torna o acesso ao carrinho muito mais facil atraves do seu icone no   cabeçalho, o usuario pode navegar pela pagina com o carrinho aberto a todo momento para ser visualizado e a qualquer momento pode diminuir a quantidade de um produto ou remove-      lo, tambem aprendi mais sobre regex e tornei a busca por produtos mais rapida e eficiente</p>
+Plataforma inspirada no e-commerce Kabum, projeto criado para aperfeiçoa minhas habilidades e aprender mais sobre Serverless, SSR, SEO, Paginas Estáticas e tudo o que o Nextjs traz de funcionalidade. Nesse projeto refiz o design do site e acrescentei outras funcionalidades como torna o acesso ao carrinho muito mais fácil através do seu ícone no cabeçalho, o usuário pode navegar pela página com o carrinho aberto a todo momento para ser visualizado e a qualquer momento pode diminuir a quantidade de um produto ou remove- lo, também aprendi mais sobre regex e tornei a busca por produtos mais rápida e eficiente</p>
 
 <h4 align="center"> 
 🚀 KabumClone Concluido ✔
