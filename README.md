@@ -15,10 +15,10 @@ Plataforma inspirada no e-commerce Kabum, projeto criado para aperfeiçoa minhas
 </h4>
 
 
-<div align="center">
+<h2 align="center">
   <p>Demonstração</p>
   <img alt="KabumClone Demontração" src="src/assets/kabumclonedemo.gif"/>
-</div>
+</h2>
 
 
 <p align="center">
