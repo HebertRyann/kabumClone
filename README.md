@@ -1,7 +1,7 @@
 <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
-<h1 align="center" style="color:#ff9000">
-  KabumClone
+<h1 align="center" style="color:blue">
+  KabumClone *blue*
 </h1>
 <div align="center">
     <a href="https://kabum-clone.vercel.app/">Visite a pagina Kabumclone</a>
