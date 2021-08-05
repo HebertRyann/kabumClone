@@ -1,6 +1,6 @@
 <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
-<h1 align="center">
+<h1 align="center" color="#ff9000">
   KabumClone
 </h1>
 <div align="center">
